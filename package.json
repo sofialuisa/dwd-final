@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sofialuisa/dwd-final/issues"
   },
-  "homepage": "https://github.com/sofialuisa/dwd-final#readme"
+  "homepage": "https://github.com/sofialuisa/dwd-final#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }

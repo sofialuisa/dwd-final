@@ -1,11 +1,9 @@
-// Sofía Luisa Suazo Monsalve | November, 2018
+// Sofía Luisa Suazo Monsalve | May, 2019
 // Gets a row of pixels from the webcam image
 // The colors of those pixels is being read and mapped to tones
-// Homework #1 for Performing The Internet class, ITP-NYU, Fall 2018.
+// Final for DWD, ITP
 
-// create dom element to change something from the synth.
-// create a dom element for play, pause, stop.
-// create dom element for change instrument?
+// script being used inline in index.html
 
 // global variables
 let capture;
