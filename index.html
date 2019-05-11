@@ -41,7 +41,7 @@
   // Homework #1 for Performing The Internet class, ITP-NYU, Fall 2018.
 
   // create dom element to change something from the synth.
-  // create a dom element for play, pause, stop.
+  // create a dom element for play, pause, restart.
   // create dom element for change instrument?
 
   // global variables
@@ -72,6 +72,7 @@
 
   let playWasPressed = false;
   let pauseWasPressed = false;
+  let RestartWasPressed = false;
   let filterValue;
   let redChecked;
   let greenChecked;
@@ -261,6 +262,10 @@
     buttonPause.position(75, canvasDim/3-15);
     buttonPause.mousePressed(pausePlaying);
 
+    let buttonRestart= createButton('Restart');
+    buttonRestart.position(130, canvasDim/3-15);
+    buttonRestart.mousePressed(RestartPlaying);
+
     checkboxRed = createCheckbox('Listen to Red', true);
     checkboxRed.position(30, canvasDim/3-80);
     checkboxRed.changed(RedCheckEvent);
@@ -287,69 +292,83 @@
   // }
 
   function RedCheckEvent() {
-    if (this.checked()) {
+    if (this.checked() && playWasPressed ==true) {
       console.log('Checking Red!');
-      redChecked = (255);
+      //redChecked = (255);
       mySynthRed.set("volume", 0);
     } else {
       console.log('Unchecking Red!');
       mySynthRed.set("volume", -400);
-      redChecked = (0);
+      //redChecked = (0);
     }
   }
 
   function GreenCheckEvent() {
-    if (this.checked()) {
+    if (this.checked() && playWasPressed ==true) {
       console.log('Checking Green!');
       mySynthGreen.set("volume", 0);
-      greenChecked = (255);
+      //greenChecked = (255);
     } else {
       console.log('Unchecking Green!');
       mySynthGreen.set("volume", -400);
-      greenChecked = (0);
+      //greenChecked = (0);
     }
   }
 
   function BlueCheckEvent() {
-    if (this.checked()) {
+    if (this.checked() && playWasPressed ==true) {
       console.log('Checking Blue!');
       mySynthBlue.set("volume", 0);
-      blueChecked = (255);
+      //blueChecked = (255);
     } else {
       console.log('Unchecking Blue!');
       mySynthBlue.set("volume", -400);
-      blueChecked = (0);
+      //blueChecked = (0);
     }
   }
 
   function startPlaying(){
-
+    playWasPressed = true;
+    pauseWasPressed = false;
+    RestartWasPressed = false;
     //Turn up synths
     mySynthRed.set("volume", 0);
     mySynthGreen.set("volume", 0);
     mySynthBlue.set("volume", 0);
     //mySynthBright.set("volume", 0);
-    playWasPressed = true;
 
   }
 
   function pausePlaying (){
-
+    pauseWasPressed = true;
+    playWasPressed = false;
+    RestartWasPressed = false;
     //Turn up synths
     mySynthRed.set("volume", -400);
     mySynthGreen.set("volume", -400);
     mySynthBlue.set("volume", -400);
     //mySynthBright.set("volume", 0);
-    pauseWasPressed = true;
+  }
+
+  function RestartPlaying (){
+    RestartWasPressed = true;
     playWasPressed = false;
+    pauseWasPressed = false;
+    //Turn up synths
+    mySynthRed.set("volume", -400);
+    mySynthGreen.set("volume", -400);
+    mySynthBlue.set("volume", -400);
+    //mySynthBright.set("volume", 0);
+    // pauseWasPressed = false;
+    // playWasPressed = false;
 
   }
 
   function draw() {
 
     frameRate(5);
-    //background(255);
-    background(redChecked, greenChecked, blueChecked);
+    background(255);
+    //background(redChecked, greenChecked, blueChecked);
 
     fill(0);
     textFont('Courier');
@@ -402,9 +421,9 @@
     if (playWasPressed == true){
       stroke(0);
       strokeWeight(1);
+      x++;
     if(x<=canvasDim){
       line(x, imageHeDim+(heightBorder*2), x, 650);
-      x++;
     //draw a square with the color of each position of the line
     fill(pixelData);
     rect(x,canvasDim-580, 90, 30);
@@ -430,9 +449,22 @@
     }
     }
 
-  if (redChecked == 0 && greenChecked == 0 && blueChecked == 0){
-      playWasPressed = false;
+    if (pauseWasPressed == true){
+      stroke(0);
+      strokeWeight(1);
+      line(x, imageHeDim+(heightBorder*2), x, 650);
     }
+
+    if (RestartWasPressed == true){
+      location.reload();
+    }
+
+
+
+
+  // if (redChecked == 0 && greenChecked == 0 && blueChecked == 0){
+  //     playWasPressed = false;
+  //   }
 
     //get the pixel data of where the scanning line is at
     pixelData = get(x,imageHeDim+(heightBorder*2));
