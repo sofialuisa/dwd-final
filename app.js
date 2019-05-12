@@ -5,13 +5,13 @@ const url = require('url')
 const path = require('path')
 var mustacheExpress = require('mustache-express');
 var { Client } = require('pg');
-var client = new Client({database: 'phlocal'});
-client.connect();
+//var client = new Client({database: 'phlocal'});
 if (process.env.DATABASE_URL){
   client = new Client({connectionString: process.env.DATABASE_URL, ssl: true});
 } else {
   client = new Client({database: 'postgresql-clean-62138'});
 }
+client.connect();
 
 //var request = require('request');
 const PORT = process.env.PORT || 8000;
