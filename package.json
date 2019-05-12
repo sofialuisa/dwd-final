@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sofialuisa/dwd-final#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "mustache-express": "^1.2.8"
+    "mustache-express": "^1.2.8",
+    "pg": "^7.11.0"
   }
 }
